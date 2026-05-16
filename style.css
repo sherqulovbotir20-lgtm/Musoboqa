@@ -1,0 +1,486 @@
+/* ── RESET & BASE ELEMENTS ── */
+*, *::before, *::after { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+:root {
+  --green:   #00ff88;
+  --green2:  #00cc66;
+  --red:     #ff4444;
+  --bg:      #0a0a14;
+  --card:    rgba(10, 10, 20, 0.75);
+  --border:  rgba(0, 255, 136, 0.25);
+  --text:    #e8e8f0;
+  --muted:   #8b8ba8;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+.page {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 10;
+}
+
+.hidden { display: none !important; }
+
+/* ── WELCOME PAGE (KIRISH EKRANI) ── */
+#welcome-page {
+  background: var(--bg);
+  text-align: center;
+  z-index: 20;
+}
+
+#welcome-page::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background-image:
+    linear-gradient(rgba(0,255,136,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,136,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: gridMove 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes gridMove {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(40px, 40px); }
+}
+
+.logo-ring {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 32px;
+}
+
+.logo-ring svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.logo-ring .ring {
+  animation: spin 8s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.logo-icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+
+.welcome-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(1.8rem, 6vw, 2.6rem);
+  font-weight: 900;
+  color: var(--green);
+  letter-spacing: 4px;
+  margin-bottom: 12px;
+  text-shadow: 0 0 30px rgba(0,255,136,0.4);
+}
+
+.welcome-sub {
+  color: var(--muted);
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  margin-bottom: 48px;
+  line-height: 1.6;
+}
+
+/* ── BUTTONS (TUGMALAR STILI) ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 40px;
+  background: var(--green);
+  color: #000;
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(0,255,136,0.3);
+}
+
+.btn-primary:hover  { transform: translateY(-2px); box-shadow: 0 0 36px rgba(0,255,136,0.5); }
+.btn-primary:active { transform: translateY(0);    box-shadow: 0 0 16px rgba(0,255,136,0.3); }
+
+.btn-danger {
+  background: linear-gradient(135deg, var(--red), #cc0000) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 20px rgba(255,68,68,0.4) !important;
+}
+
+/* ── AUTH PAGE (RO'YXATDAN O'TISH / KIRISH) ── */
+#auth-page { z-index: 20; background: var(--bg); }
+
+.auth-card {
+  width: 100%;
+  max-width: 380px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  padding: 36px 28px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.auth-card .badge {
+  display: inline-block;
+  background: rgba(0,255,136,0.1);
+  border: 1px solid rgba(0,255,136,0.25);
+  color: var(--green);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+
+#form-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--green);
+  margin-bottom: 6px;
+  letter-spacing: 2px;
+}
+
+#form-desc {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-bottom: 28px;
+}
+
+.input-group { margin-bottom: 16px; }
+
+.input-group label {
+  display: block;
+  color: var(--green);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+#submit-btn { width: 100%; padding: 15px; margin-top: 8px; font-size: 0.85rem; }
+#switch-text { display: block; text-align: center; margin-top: 18px; color: var(--muted); font-size: 0.83rem; cursor: pointer; }
+
+/* ── MAIN DASHBOARD & MAP ZONE ── */
+#main-dashboard {
+  padding: 0;
+  justify-content: flex-start;
+}
+
+#map-zone {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* ── EKRA NDA GI PANELlARNI PASTGA JOYLASHTIRISH ── */
+.stats-grid, #find-me-btn {
+  z-index: 5;
+  position: absolute;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: calc(100% - 32px) !important;
+  max-width: 440px !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  bottom: 145px; 
+  margin-top: 0px; 
+  margin-bottom: 0px;
+}
+
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 14px;
+}
+
+.stat-card h3 {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.stat-card p {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--green);
+}
+
+#find-me-btn {
+  background: var(--card) !important;
+  border: 1px solid var(--green) !important;
+  color: var(--green) !important;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  bottom: 95px;
+}
+
+#start-run-btn {
+  position: absolute !important;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px) !important;
+  max-width: 440px !important;
+  padding: 18px;
+  font-size: 0.95rem;
+  letter-spacing: 3px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  z-index: 5;
+}
+
+#start-run-btn.btn-danger {
+  transform: translateX(-50%) scale(1) !important;
+}
+
+/* ── BURGER MENU BUTTON ── */
+.burger-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  width: 44px;
+  height: 44px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.burger-btn span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--green);
+  border-radius: 2px;
+}
+
+/* ── YON SIDE MENU PANEL ── */
+.side-panel {
+  position: fixed;
+  top: 0;
+  right: -290px;
+  width: 290px;
+  height: 100%;
+  background: rgba(10, 10, 20, 0.96);
+  border-left: 1px solid var(--border);
+  z-index: 1000;
+  transition: right 0.3s ease;
+  padding: 24px;
+  box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.side-panel.open { right: 0; }
+
+.close-menu-btn {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.menu-header {
+  margin-top: 40px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding-bottom: 12px;
+}
+
+.menu-header .logo-text {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.95rem;
+  font-weight: 900;
+  color: var(--green);
+  letter-spacing: 2px;
+}
+
+.menu-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.menu-user-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 14px;
+  border-radius: 12px;
+}
+
+#user-greeting { font-size: 0.9rem; color: #fff; }
+
+.menu-stat-item {
+  background: rgba(0, 255, 136, 0.02);
+  border: 1px dashed var(--green);
+  padding: 14px;
+  border-radius: 12px;
+}
+
+.menu-stat-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+
+.menu-stat-value {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--green);
+}
+
+/* ── 🏆 TOP REYTING (LEADERBOARD) DIZAYNI ── */
+.menu-rating-section {
+  margin-top: 5px;
+  padding-top: 15px;
+  border-top: 1px dashed rgba(0, 255, 136, 0.2);
+}
+
+.leaderboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 250px; /* Menyudan chiqib ketmasligi uchun scroll */
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* Skrollbarni chiroyli neon ko'rinishga keltirish */
+.leaderboard-container::-webkit-scrollbar {
+  width: 4px;
+}
+.leaderboard-container::-webkit-scrollbar-thumb {
+  background: var(--green);
+  border-radius: 2px;
+}
+
+.leaderboard-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  transition: background 0.2s;
+}
+
+.leaderboard-item:hover {
+  background: rgba(0, 255, 136, 0.04);
+}
+
+.rank-number {
+  font-weight: 700;
+  color: var(--muted);
+  margin-right: 6px;
+  font-family: 'Orbitron', monospace;
+}
+
+.rank-name {
+  color: #fff;
+  font-weight: 500;
+}
+
+.rank-distance {
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  color: var(--green);
+}
+
+/* Kuchli uchlik uchun maxsus neon effektlari */
+.rank-1 { border-color: rgba(255, 215, 0, 0.25); background: rgba(255, 215, 0, 0.02); }
+.rank-2 { border-color: rgba(192, 192, 192, 0.25); background: rgba(192, 192, 192, 0.02); }
+.rank-3 { border-color: rgba(205, 127, 50, 0.25); background: rgba(205, 127, 50, 0.02); }
+
+.rank-1 .rank-distance { color: #ffd700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+.rank-2 .rank-distance { color: #c0c0c0; }
+.rank-3 .rank-distance { color: #cd7f32; }
+
+/* Pulse Animatsiyasi (Xaritadagi nuqta uchun) */
+@keyframes pulse {
+  0%   { transform: scale(0.9); opacity: 0.8; }
+  50%  { transform: scale(1.2); opacity: 0.3; }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}

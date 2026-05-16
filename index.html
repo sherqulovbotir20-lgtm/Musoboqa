@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Challenge Run</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght=700;900&family=DM+Sans:wght=400;500;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="welcome-page" class="page">
+    <div class="logo-ring">
+      <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="60" cy="60" r="54" stroke="rgba(0,255,136,0.15)" stroke-width="1"/>
+        <g class="ring">
+          <circle cx="60" cy="60" r="54" stroke="url(#grd)" stroke-width="2" stroke-dasharray="80 260" stroke-linecap="round"/>
+        </g>
+        <defs>
+          <linearGradient id="grd" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#00ff88"/>
+            <stop offset="100%" stop-color="transparent"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="logo-icon">🏃</div>
+    </div>
+    <h1 class="welcome-title">CHALLENGE<br>RUN</h1>
+    <p class="welcome-sub">GPS kuzatuv · Masofa · Vaqt<br>Real vaqtda yugurish ilovasi</p>
+    <button class="btn-primary" id="start-btn">BOSHLASH →</button>
+  </div>
+
+
+  <div id="auth-page" class="page hidden">
+    <div class="auth-card">
+      <span class="badge">CHALLENGE RUN</span>
+      <h2 id="form-title">RO'YXATDAN O'TISH</h2>
+      <p id="form-desc">Ilova uchun yangi profil yarating</p>
+      
+      <div class="input-group">
+        <label for="username">Login</label>
+        <input type="text" id="username" placeholder="Foydalanuvchi nomi" autocomplete="off" />
+      </div>
+      
+      <div class="input-group">
+        <label for="password">Parol</label>
+        <input type="password" id="password" placeholder="••••••••" />
+      </div>
+      
+      <button class="btn-primary" id="submit-btn">YUBORISH</button>
+      <span id="switch-text">Sizda profil bormi? Tizimga kirish</span>
+    </div>
+  </div>
+
+
+  <div id="main-dashboard" class="page hidden">
+    
+    <button id="menu-toggle-btn" class="burger-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div id="side-menu" class="side-panel">
+      <button id="close-menu-btn" class="close-menu-btn">&times;</button>
+      
+      <div class="menu-header">
+        <span class="logo-text">CHALLENGE RUN</span>
+      </div>
+      
+      <div class="menu-body">
+        <div class="menu-user-card">
+          <span id="user-greeting">Salom! 👋</span>
+        </div>
+        
+        <div class="menu-stat-item">
+          <div class="menu-stat-label">MENING KUTUBXONAM (JAMI):</div>
+          <div id="total-library-distance" class="menu-stat-value">0.00 km</div>
+        </div>
+
+        <div id="menu-rating-section" class="menu-rating-section">
+          <div class="menu-stat-label" style="margin-bottom: 10px; color: var(--green);">🏆 TOP REYTING:</div>
+          <div id="leaderboard-list" class="leaderboard-container"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h3>Masofa</h3>
+        <p id="display-distance">0.00 km</p>
+      </div>
+      <div class="stat-card">
+        <h3>Vaqt</h3>
+        <p id="display-time">00:00:00</p>
+      </div>
+    </div>
+
+    <button id="find-me-btn">🎯 MEN QAYERDAMAN?</button>
+    
+    <div id="map-zone"></div>
+    
+    <button class="btn-primary" id="start-run-btn">YUGURISHNI BOSHLASH</button>
+  </div>
+
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  
+  <script type="module" src="script.js"></script>
+</body>
+</html>
